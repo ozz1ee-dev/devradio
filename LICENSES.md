@@ -13,7 +13,7 @@ material containing third-party samples or loops.
 
 ## Attribution format
 
-The n8n importer writes this comment into AzuraCast:
+The n8n importer writes this comment into the station's library:
 
 ```
 Artist - Title | Licence: <licence> | Source: <source_url> | AI: <name> (<plan>) | Artist: <artist_url>

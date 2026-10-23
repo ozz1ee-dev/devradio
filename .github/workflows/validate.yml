@@ -36,7 +36,7 @@ jobs:
 
       # Example metadata uses a dummy audio URL, and the catalogue may have no tracks.
       # Check both on every run. Full downloads still apply only to changed track.yaml files.
-      # This workflow does not contact AzuraCast and has no station secrets.
+      # This workflow does not contact the playout server and has no station secrets.
       - name: Validate example metadata and track index
         run: |
           set -euo pipefail

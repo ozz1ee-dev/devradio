@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { docs, site, station } from "../config";
+import { docs, site } from "../config";
 import { notes } from "../lib/news";
 import { httpUrl, loadTracks } from "../lib/tracks";
 
@@ -31,9 +31,6 @@ const pageTitle = `${site.name} — lo-fi, and the news from the tools`;
         </button>
         <a class="button ghost" href="#submit">Submit a track</a>
       </div>
-      <p class="alt-listen">
-        Or open the <a href={station.publicPlayerUrl}>public player</a>.
-      </p>
     </section>
 
     <section class="section" id="news" aria-labelledby="news-title">
@@ -73,7 +70,7 @@ const pageTitle = `${site.name} — lo-fi, and the news from the tools`;
         <p class="lede">
           The library grows by pull request. Audio files are not committed. You host the file at a
           public HTTPS URL, add <span class="mono">tracks/&lt;slug&gt;/track.yaml</span>, and CI
-          downloads that URL to check the checksum. GitHub never talks to the AzuraCast server.
+          downloads that URL to check the checksum. GitHub never talks to the playout server.
         </p>
         <ol class="steps">
           <li>

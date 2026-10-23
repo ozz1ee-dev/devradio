@@ -103,11 +103,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
           <a href={`${base}feed.xml`}>RSS</a>
           <a href={site.repoUrl}>GitHub</a>
           <a href={docs.takedown}>Takedown</a>
-          <a href={station.publicPlayerUrl}>Public player</a>
           <a href={station.streamUrl}>Stream</a>
         </nav>
         <p class="fine">
-          AzuraCast station {station.azuraCastStationId} · {station.shortcode}.
+          Station {station.stationId} · {station.shortcode}.
           Geist and JetBrains Mono are used under the
           <a href={`${base}fonts/geist/OFL.txt`}>SIL Open Font License</a>
           (<a href={`${base}fonts/jetbrains-mono/OFL.txt`}>JetBrains Mono licence</a>).
