@@ -1,15 +1,20 @@
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Resvg } from "@resvg/resvg-js";
+import { assertIcon, assertOgImage } from "./image-text.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const fonts = {
-  fontFiles: [
-    resolve(root, "src/assets/fonts/geist/Geist-Variable.woff2"),
-    resolve(root, "src/assets/fonts/jetbrains-mono/JetBrainsMono-Medium.woff2"),
-    resolve(root, "src/assets/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2"),
-  ],
+const fontFiles = [
+  resolve(root, "brand/fonts/Geist-Variable.ttf"),
+  resolve(root, "brand/fonts/JetBrainsMono-Medium.ttf"),
+].map((file) => {
+  if (!existsSync(file)) throw new Error(`Missing bundled font ${file}`);
+  return file;
+});
+
+const font = {
+  fontFiles,
   loadSystemFonts: false,
   defaultFontFamily: "Geist",
   sansSerifFamily: "Geist",
@@ -19,11 +24,12 @@ const fonts = {
 function render(svg, width) {
   const resvg = new Resvg(svg, {
     fitTo: { mode: "width", value: width },
-    font: fonts,
+    font,
     background: "#1a1b26",
     shapeRendering: 2,
     textRendering: 1,
     imageRendering: 0,
+    logLevel: "warn",
   });
   return resvg.render().asPng();
 }
@@ -35,16 +41,18 @@ function writePng(relativePath, png) {
   return path;
 }
 
-const ogSvg = readFileSync(resolve(root, "brand/devradio-og.svg"));
-const ogPng = render(ogSvg, 1200);
+const ogPng = render(readFileSync(resolve(root, "brand/devradio-og.svg")), 1200);
+const ogStats = assertOgImage(ogPng);
 const ogPath = writePng("public/og/devradio-og.png", ogPng);
 
 const iconSvg = readFileSync(resolve(root, "public/favicon.svg"));
-writePng("public/favicon-32.png", render(iconSvg, 32));
-writePng("public/apple-touch-icon.png", render(iconSvg, 180));
+const favicon = render(iconSvg, 32);
+const apple = render(iconSvg, 180);
+assertIcon(favicon, "favicon-32.png", 32);
+assertIcon(apple, "apple-touch-icon.png", 180);
+writePng("public/favicon-32.png", favicon);
+writePng("public/apple-touch-icon.png", apple);
 
-if (ogPng.length > 300 * 1024) {
-  throw new Error(`OG image is ${ogPng.length} bytes; limit is 300 KB`);
-}
-
-console.log(`OG image ${ogPng.length} bytes → ${ogPath}`);
+console.log(
+  `OG image ${ogPng.length} bytes → ${ogPath} (title ink ${ogStats.title.count}, tagline ink ${ogStats.tagline.count}, badge ink ${ogStats.badge.count})`,
+);

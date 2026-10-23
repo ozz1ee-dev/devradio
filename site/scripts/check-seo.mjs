@@ -1,6 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { assertIcon, assertOgImage } from "./image-text.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = resolve(root, "dist");
@@ -46,19 +47,6 @@ function requireMeta(html, key, name, expected) {
   if (expected !== undefined && tag.content !== expected) {
     fail(`meta ${name} is ${JSON.stringify(tag.content)}, expected ${JSON.stringify(expected)}`);
   }
-}
-
-function pngSize(relativePath) {
-  const bytes = readFileSync(resolve(dist, relativePath));
-  if (bytes.subarray(0, 8).toString("binary") !== "\x89PNG\r\n\x1a\n") {
-    fail(`${relativePath} is not a PNG`);
-    return { width: 0, height: 0, bytes: bytes.length };
-  }
-  return {
-    width: bytes.readUInt32BE(16),
-    height: bytes.readUInt32BE(20),
-    bytes: bytes.length,
-  };
 }
 
 const html = read("index.html");
@@ -200,14 +188,15 @@ if (locs.some((loc) => loc.includes("feed.xml"))) fail("sitemap includes the RSS
 const cname = read("CNAME").trim();
 if (cname !== "devradio.co.uk") fail(`CNAME is ${JSON.stringify(cname)}`);
 
-const og = pngSize("og/devradio-og.png");
-if (og.width !== 1200 || og.height !== 630) fail(`OG image is ${og.width}x${og.height}`);
-if (og.bytes > 300 * 1024) fail(`OG image is ${og.bytes} bytes`);
-
-const favicon = pngSize("favicon-32.png");
-if (favicon.width !== 32 || favicon.height !== 32) fail("favicon-32.png is not 32x32");
-const apple = pngSize("apple-touch-icon.png");
-if (apple.width !== 180 || apple.height !== 180) fail("apple-touch-icon.png is not 180x180");
+let og = { width: 0, height: 0, bytes: 0 };
+try {
+  const ogBuffer = readFileSync(resolve(dist, "og/devradio-og.png"));
+  og = { ...assertOgImage(ogBuffer), width: 1200, height: 630, bytes: ogBuffer.length };
+  assertIcon(readFileSync(resolve(dist, "favicon-32.png")), "favicon-32.png", 32);
+  assertIcon(readFileSync(resolve(dist, "apple-touch-icon.png")), "apple-touch-icon.png", 180);
+} catch (error) {
+  fail(error.message);
+}
 
 const manifest = JSON.parse(read("site.webmanifest") || "{}");
 for (const key of ["name", "short_name", "background_color", "theme_color", "icons"]) {
