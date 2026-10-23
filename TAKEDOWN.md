@@ -7,7 +7,7 @@ broadcast on the station. It is a practical policy, not legal advice.
 
 Contact the maintainers by either route:
 
-1. **Email:** `takedown@devradio.co.uk` (replace with the real station address before launch).
+1. **Email:** `takedown@devradio.co.uk`.
 2. **GitHub issue:** title it `[TAKEDOWN] <track id or URL>` and include the details below.
    For sensitive personal information, email instead of opening a public issue.
 
