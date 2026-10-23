@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/lofi-radio/track.schema.json",
+  "title": "Lo-fi radio track submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "artist",
+    "licence",
+    "source_url",
+    "ai_tool",
+    "prs_member",
+    "ppl_member",
+    "contains_third_party_samples",
+    "attestation",
+    "audio"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable slug. Must match the tracks/<slug>/ folder name.",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "artist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 500
+        }
+      }
+    },
+    "licence": {
+      "type": "string",
+      "enum": [
+        "CC-BY-4.0",
+        "CC-BY-SA-4.0",
+        "CC0-1.0",
+        "SUNO-PAID-OWN"
+      ]
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1000,
+      "description": "Public page for the original track or the Suno generation."
+    },
+    "ai_tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "plan"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "e.g. Suno, Udio, none"
+        },
+        "plan": {
+          "type": "string",
+          "enum": [
+            "none",
+            "free",
+            "pro",
+            "premier"
+          ],
+          "description": "Plan active at generation time. SUNO-PAID-OWN requires pro or premier."
+        }
+      }
+    },
+    "prs_member": {
+      "const": false,
+      "description": "Contributor/artist is not a PRS (or other CMO) member."
+    },
+    "ppl_member": {
+      "const": false,
+      "description": "Contributor/artist is not a PPL (or other CMO) member."
+    },
+    "contains_third_party_samples": {
+      "const": false
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted",
+        "github_user",
+        "date"
+      ],
+      "properties": {
+        "accepted": {
+          "const": true
+        },
+        "github_user": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audio_url",
+        "sha256",
+        "format",
+        "duration_sec"
+      ],
+      "properties": {
+        "audio_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 1000,
+          "description": "Public HTTPS URL to the exact audio file. CI and the n8n importer download it from here; audio is never committed to the repository or stored in object storage."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Lower-case SHA-256 of the exact file at audio_url."
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "mp3",
+            "flac"
+          ]
+        },
+        "duration_sec": {
+          "type": "integer",
+          "minimum": 90,
+          "maximum": 600
+        },
+        "lufs_integrated": {
+          "type": "number",
+          "description": "Optional declared integrated loudness; validator accepts -17..-13 LUFS (target -16..-14, proposal)."
+        }
+      }
+    },
+    "genre": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 40
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "licence"
+        ],
+        "properties": {
+          "licence": {
+            "const": "SUNO-PAID-OWN"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ai_tool": {
+            "required": [
+              "name",
+              "plan"
+            ],
+            "properties": {
+              "plan": {
+                "enum": [
+                  "pro",
+                  "premier"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
