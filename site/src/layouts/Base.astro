@@ -66,10 +66,7 @@ const jsonLd = JSON.stringify(structuredData());
               <rect x="1.25" y="1.25" width="29.5" height="29.5" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
               <path d="M8 16h2.2M13.2 11.5v9M18.2 8.5v15M23.2 12v8" stroke="currentColor" stroke-width="1.6" fill="none"></path>
             </svg>
-            <span>
-              <span class="brand-name">{site.name}</span>
-              <span class="brand-host mono">{station.shortcode}</span>
-            </span>
+            <span class="brand-name">{site.name}</span>
           </a>
           <nav class="nav" aria-label="Sections">
             <a href="#news">News</a>
@@ -127,7 +124,6 @@ const jsonLd = JSON.stringify(structuredData());
           <a href={station.streamUrl}>Stream</a>
         </nav>
         <p class="fine">
-          Station {station.stationId} · {station.shortcode}.
           Geist and JetBrains Mono are used under the
           <a href={`${base}fonts/geist/OFL.txt`}>SIL Open Font License</a>
           (<a href={`${base}fonts/jetbrains-mono/OFL.txt`}>JetBrains Mono licence</a>).
