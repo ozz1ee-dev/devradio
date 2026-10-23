@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+import { docs, site, station } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.name, description = site.description } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url);
+---
+
+<!doctype html>
+<html lang={site.language} data-theme="tokyo">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1a1b26" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href={`${base}feed.xml`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <script is:inline>
+      try {
+        var saved = localStorage.getItem("devradio-theme");
+        var allowed = { tokyo: 1, storm: 1, phosphor: 1, paper: 1 };
+        if (saved && allowed[saved]) document.documentElement.setAttribute("data-theme", saved);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header" id="top">
+      <div class="shell">
+        <div class="header-row">
+          <a class="brand" href="#top">
+            <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="1.25" y="1.25" width="29.5" height="29.5" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+              <path d="M8 16h2.2M13.2 11.5v9M18.2 8.5v15M23.2 12v8" stroke="currentColor" stroke-width="1.6" fill="none"></path>
+            </svg>
+            <span>
+              <span class="brand-name">{site.name}</span>
+              <span class="brand-host mono">{station.shortcode}</span>
+            </span>
+          </a>
+          <nav class="nav" aria-label="Sections">
+            <a href="#news">News</a>
+            <a href="#submit">Submit</a>
+            <a href="#tracks">Tracks</a>
+            <a href="#doctrine">Doctrine</a>
+          </nav>
+          <div class="tools">
+            <div class="themes" role="group" aria-label="Colour theme">
+              <button type="button" data-theme-value="tokyo" aria-pressed="true" aria-label="Tokyo Night">
+                <span class="swatch swatch-tokyo"></span>
+              </button>
+              <button type="button" data-theme-value="storm" aria-pressed="false" aria-label="Storm">
+                <span class="swatch swatch-storm"></span>
+              </button>
+              <button type="button" data-theme-value="phosphor" aria-pressed="false" aria-label="Phosphor">
+                <span class="swatch swatch-phosphor"></span>
+              </button>
+              <button type="button" data-theme-value="paper" aria-pressed="false" aria-label="Paper">
+                <span class="swatch swatch-paper"></span>
+              </button>
+            </div>
+            <button
+              type="button"
+              class="play"
+              data-play
+              data-label-play="Play"
+              data-label-stop="Stop"
+              aria-pressed="false"
+              aria-label="Play the live stream"
+            >
+              <svg class="icon-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 1.2v9.6L10.6 6z"></path></svg>
+              <svg class="icon-stop" viewBox="0 0 12 12" aria-hidden="true"><rect x="2.2" y="2.2" width="7.6" height="7.6"></rect></svg>
+              <span data-play-label>Play</span>
+            </button>
+          </div>
+        </div>
+        <p class="now-playing" id="now-playing" data-state="offline" aria-live="polite">
+          <span class="np-kicker">Now</span>
+          <span id="now-playing-text">Offline — coming soon</span>
+        </p>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell">
+        <p class="footer-name">{site.name}</p>
+        <p>{description}</p>
+        <nav class="footer-links" aria-label="Elsewhere">
+          <a href={`${base}feed.xml`}>RSS</a>
+          <a href={site.repoUrl}>GitHub</a>
+          <a href={docs.takedown}>Takedown</a>
+          <a href={station.publicPlayerUrl}>Public player</a>
+          <a href={station.streamUrl}>Stream</a>
+        </nav>
+        <p class="fine">
+          AzuraCast station {station.azuraCastStationId} · {station.shortcode}.
+          Geist and JetBrains Mono are used under the
+          <a href={`${base}fonts/geist/OFL.txt`}>SIL Open Font License</a>
+          (<a href={`${base}fonts/jetbrains-mono/OFL.txt`}>JetBrains Mono licence</a>).
+        </p>
+      </div>
+    </footer>
+    <script>
+      import { boot } from "../scripts/station";
+      boot();
+    </script>
+  </body>
+</html>

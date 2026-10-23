@@ -1,0 +1,28 @@
+id: midnight-tape-loop
+title: Midnight Tape Loop
+artist:
+  name: Oskar Example
+  url: https://example.com/oskars-music
+licence: SUNO-PAID-OWN
+source_url: https://suno.com/song/00000000-0000-0000-0000-000000000000
+ai_tool:
+  name: Suno
+  plan: premier
+prs_member: false
+ppl_member: false
+contains_third_party_samples: false
+attestation:
+  accepted: true
+  github_user: oskar-example
+  date: "2026-10-23"
+audio:
+  audio_url: https://example.com/audio/midnight-tape-loop.mp3
+  sha256: 9f2c4e7a1b3d5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcd
+  format: mp3
+  duration_sec: 184
+  lufs_integrated: -14.2
+genre: lo-fi
+tags:
+  - chill
+  - instrumental
+  - tape-hiss

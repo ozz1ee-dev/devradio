@@ -1,0 +1,199 @@
+---
+import Base from "../layouts/Base.astro";
+import { docs, site, station } from "../config";
+import { notes } from "../lib/news";
+import { httpUrl, loadTracks } from "../lib/tracks";
+
+const tracks = loadTracks();
+const pageTitle = `${site.name} — lo-fi, and the news from the tools`;
+---
+
+<Base title={pageTitle}>
+  <div class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="kicker">Station · 24/7</p>
+      <h1 id="hero-title">{site.name}<span class="caret" aria-hidden="true"></span></h1>
+      <p class="tagline">Lo-fi for the long session, and a short bulletin when the tools change.</p>
+      <p class="deck">
+        People choose the music. Short English bulletins cover AI and software.
+        The voices are generated, and the station says so on air.
+      </p>
+      <div class="actions">
+        <button
+          type="button"
+          class="button"
+          data-play
+          data-label-play="Listen live"
+          data-label-stop="Stop"
+          aria-pressed="false"
+        >
+          <span data-play-label>Listen live</span>
+        </button>
+        <a class="button ghost" href="#submit">Submit a track</a>
+      </div>
+      <p class="alt-listen">
+        Or open the <a href={station.publicPlayerUrl}>public player</a>.
+      </p>
+    </section>
+
+    <section class="section" id="news" aria-labelledby="news-title">
+      <div>
+        <p class="kicker">01</p>
+        <h2 id="news-title">News</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Between tracks, DevRadio reads a short English bulletin: one story about AI or software,
+          written to be heard once. Some editions are a dialogue between two hosts. Both voices are
+          synthetic, and that is said before the item.
+        </p>
+        <div class="notes">
+          {
+            notes.map((note) => (
+              <article class="note">
+                <p class="idx">{note.kicker}</p>
+                <div>
+                  <h3>{note.title}</h3>
+                  <p>{note.body}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+        <p class="fine">These notes describe the format. They are not a published archive.</p>
+      </div>
+    </section>
+
+    <section class="section" id="submit" aria-labelledby="submit-title">
+      <div>
+        <p class="kicker">02</p>
+        <h2 id="submit-title">Submit</h2>
+      </div>
+      <div>
+        <p class="lede">
+          The library grows by pull request. Audio files are not committed. You host the file at a
+          public HTTPS URL, add <span class="mono">tracks/&lt;slug&gt;/track.yaml</span>, and CI
+          downloads that URL to check the checksum. GitHub never talks to the AzuraCast server.
+        </p>
+        <ol class="steps">
+          <li>
+            <span>1</span>
+            <p>Fork the repository and branch from main. Use a lower-case slug of letters, digits, and hyphens.</p>
+          </li>
+          <li>
+            <span>2</span>
+            <p>Copy <span class="mono">examples/track.yaml</span> to <span class="mono">tracks/&lt;slug&gt;/track.yaml</span>. The folder name is the track id.</p>
+          </li>
+          <li>
+            <span>3</span>
+            <p>Publish the audio yourself. Set <span class="mono">audio.audio_url</span> and the SHA-256 of that exact file.</p>
+          </li>
+          <li>
+            <span>4</span>
+            <p>Open the pull request and complete every attestation. A person reviews the licence before merge.</p>
+          </li>
+        </ol>
+        <p class="doc-links">
+          <a href={docs.contributing}>Contribution guide</a>
+          <a href={docs.licenses}>Accepted licences</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="tracks" aria-labelledby="tracks-title">
+      <div>
+        <p class="kicker">03</p>
+        <h2 id="tracks-title">Tracks</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Merged tracks are listed from <span class="mono">tracks/index.json</span> with the artist,
+          the licence, and the source. The audio stays at the contributor’s URL.
+        </p>
+        {
+          tracks.length === 0 ? (
+            <div class="empty">
+              <p class="kicker">Catalogue</p>
+              <p class="empty-title">No tracks in the index yet.</p>
+              <p>When the first submission is merged, its credit appears here.</p>
+            </div>
+          ) : (
+            <ol class="credits">
+              {tracks.map((track) => {
+                const source = httpUrl(track.source_url);
+                return (
+                  <li class="credit">
+                    <p class="idx">{track.id}</p>
+                    <div>
+                      <p class="credit-title">{track.title || track.id}</p>
+                      {track.artist ? <p>{track.artist}</p> : null}
+                      <p class="credit-meta">
+                        {track.licence ? <span>{track.licence}</span> : null}
+                        {source ? (
+                          <a href={source}>Source</a>
+                        ) : null}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="section" id="doctrine" aria-labelledby="doctrine-title">
+      <div>
+        <p class="kicker">04</p>
+        <h2 id="doctrine-title">Doctrine</h2>
+      </div>
+      <div>
+        <p class="lede">Five rules for what goes on the air.</p>
+        <div class="rules">
+          <article class="rule">
+            <p class="idx">01</p>
+            <div>
+              <h3>Human-curated</h3>
+              <p>A person accepts every track. Nothing lands on the station because a script found a file.</p>
+            </div>
+          </article>
+          <article class="rule">
+            <p class="idx">02</p>
+            <div>
+              <h3>Licensed music only</h3>
+              <p>
+                The accepted values are CC-BY-4.0, CC-BY-SA-4.0, CC0-1.0, and SUNO-PAID-OWN, on the
+                terms in the <a href={docs.licenses}>licence notes</a>.
+              </p>
+            </div>
+          </article>
+          <article class="rule">
+            <p class="idx">03</p>
+            <div>
+              <h3>AI voices are disclosed</h3>
+              <p>Bulletins and two-host dialogues use synthetic speech, and the broadcast says so.</p>
+            </div>
+          </article>
+          <article class="rule">
+            <p class="idx">04</p>
+            <div>
+              <h3>Sources stay attached</h3>
+              <p>Artist, licence, and source URL remain with the track, on the station and in this list.</p>
+            </div>
+          </article>
+          <article class="rule">
+            <p class="idx">05</p>
+            <div>
+              <h3>Takedown has a path</h3>
+              <p>
+                A verified complaint comes off the stream and out of the repository. The procedure is
+                the <a href={docs.takedown}>takedown note</a>.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

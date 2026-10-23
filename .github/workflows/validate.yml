@@ -1,0 +1,68 @@
+name: Validate track submissions
+
+on:
+  pull_request:
+    paths:
+      - "tracks/**"
+      - "schema/**"
+      - "scripts/validate.py"
+      - "examples/**"
+      - ".github/workflows/validate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg and Chromaprint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg libchromaprint-tools
+
+      - name: Install Python dependencies
+        run: python -m pip install --upgrade pip "jsonschema[format]" pyyaml
+
+      # Example metadata uses a dummy audio URL, and the catalogue may have no tracks.
+      # Check both on every run. Full downloads still apply only to changed track.yaml files.
+      # This workflow does not contact AzuraCast and has no station secrets.
+      - name: Validate example metadata and track index
+        run: |
+          set -euo pipefail
+          python scripts/validate.py examples/track.yaml --schema-only
+          python scripts/validate.py --check-index
+
+      # pull_request (not pull_request_target): fork code never receives secrets.
+      # ACOUSTID_API_KEY is intentionally not configured here; run it locally if wanted.
+      - name: Validate changed tracks
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${{ github.event.pull_request.base.sha }}"
+          if ! git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
+            git fetch --no-tags origin "$BASE" --depth=1 || true
+          fi
+          if git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
+            RANGE="${BASE}...HEAD"
+          else
+            RANGE="HEAD^..HEAD"
+          fi
+          mapfile -t TRACKS < <(git diff --name-only --diff-filter=ACMR "$RANGE" -- 'tracks/*/track.yaml')
+          if [ "${#TRACKS[@]}" -eq 0 ]; then
+            echo "No track.yaml changes to validate."
+            exit 0
+          fi
+          printf 'Changed tracks:\n'
+          printf '  %s\n' "${TRACKS[@]}"
+          python scripts/validate.py "${TRACKS[@]}"
