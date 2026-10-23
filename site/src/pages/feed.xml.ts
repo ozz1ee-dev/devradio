@@ -34,7 +34,7 @@ export const GET: APIRoute = ({ site: origin }) => {
   <channel>
     <title>${escapeXml(site.name)}</title>
     <link>${escapeXml(`${root}/`)}</link>
-    <description>${escapeXml(site.description)}</description>
+    <description>${escapeXml(site.seoDescription)}</description>
     <language>${escapeXml(site.language)}</language>
     <lastBuildDate>${escapeXml(new Date("2026-10-23T00:00:00Z").toUTCString())}</lastBuildDate>
 ${items}

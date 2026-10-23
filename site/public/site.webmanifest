@@ -1,0 +1,31 @@
+{
+  "name": "DevRadio",
+  "short_name": "DevRadio",
+  "description": "A 24/7 lo-fi internet radio station. Short English conversations cover AI and developer news, hosted by Kai and Mira. Their voices are AI-generated. Alpha.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "en",
+  "background_color": "#1a1b26",
+  "theme_color": "#1a1b26",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

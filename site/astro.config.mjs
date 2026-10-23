@@ -1,9 +1,18 @@
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
-// Canonical origin once devradio.co.uk points here.
-// Do not add site/public/CNAME in this change. A CNAME file inside the Pages
-// artifact sets the repository's custom domain on the next deploy.
+// Canonical origin for devradio.co.uk. public/CNAME is copied into the Pages
+// artifact so the custom domain already configured on the repository stays
+// attached to the next deploy.
 export default defineConfig({
   site: "https://devradio.co.uk",
   base: "/",
+  trailingSlash: "ignore",
+  integrations: [
+    sitemap({
+      filter(page) {
+        return !page.includes("feed.xml");
+      },
+    }),
+  ],
 });
