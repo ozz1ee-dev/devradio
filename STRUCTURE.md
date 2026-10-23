@@ -45,7 +45,7 @@
 ## Website
 
 The public site lives in `site/` (Astro). `.github/workflows/pages.yml` builds it and can deploy
-to GitHub Pages after Pages is enabled. Stream, public player, and now-playing URLs are only in
+to GitHub Pages after Pages is enabled. Stream and now-playing URLs are only in
 `site/src/config.ts`. The credits section is rendered from `tracks/index.json` at build time.
 No workflow calls the playout server. The browser asks the public now-playing URL itself and shows an
 offline state when that request fails.

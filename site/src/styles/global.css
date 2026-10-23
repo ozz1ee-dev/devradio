@@ -449,14 +449,6 @@ ol {
   margin-top: 1.75rem;
 }
 
-.alt-listen {
-  margin-top: 1rem;
-  color: var(--faint);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.78rem;
-  font-feature-settings: "liga" 0, "calt" 0;
-}
-
 .section {
   display: grid;
   grid-template-columns: 11rem 1fr;

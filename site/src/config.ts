@@ -1,5 +1,5 @@
 /**
- * Station and site settings. Stream, player, and now-playing URLs live only here.
+ * Station and site settings. Stream and now-playing URLs live only here.
  *
  * Station id 7, shortcode `devradio.co.uk`.
  * The stream and now-playing endpoints are the public URLs for that station.
@@ -10,7 +10,6 @@ export const station = {
   stationId: 7,
   shortcode: "devradio.co.uk",
   streamUrl: "https://stream.radiohost.cloud/listen/devradio.co.uk/radio.mp3",
-  publicPlayerUrl: "https://stream.radiohost.cloud/public/devradio.co.uk",
   nowPlayingUrl: "https://stream.radiohost.cloud/api/nowplaying/devradio.co.uk",
 } as const;
 
