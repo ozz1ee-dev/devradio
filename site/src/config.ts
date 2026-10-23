@@ -16,10 +16,23 @@ export const station = {
 export const site = {
   name: "DevRadio",
   url: "https://devradio.co.uk",
+  title: "DevRadio — lo-fi beats and AI developer news",
   description:
     "A 24/7 community-curated lo-fi station with short English bulletins on AI and software. The voices are AI-generated and disclosed on air.",
+  seoDescription:
+    "A 24/7 lo-fi internet radio station. Short English conversations cover AI and developer news, hosted by Kai and Mira. Their voices are AI-generated. Alpha.",
   repoUrl: "https://github.com/ozz1ee-dev/devradio",
   language: "en",
+  locale: "en_GB",
+  themeColor: "#1a1b26",
+  logoPath: "/apple-touch-icon.png",
+  ogImage: {
+    path: "/og/devradio-og.png",
+    width: 1200,
+    height: 630,
+    alt: "DevRadio. Lo-fi beats. AI news, slowed down.",
+    type: "image/png",
+  },
 } as const;
 
 export const docs = {

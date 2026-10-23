@@ -5,10 +5,11 @@ import { notes } from "../lib/news";
 import { httpUrl, loadTracks } from "../lib/tracks";
 
 const tracks = loadTracks();
-const pageTitle = `${site.name} — lo-fi, and the news from the tools`;
+const pageTitle = site.title;
+const pageDescription = site.seoDescription;
 ---
 
-<Base title={pageTitle}>
+<Base title={pageTitle} description={pageDescription}>
   <div class="shell">
     <section class="hero" aria-labelledby="hero-title">
       <p class="kicker">Station · 24/7</p>
@@ -127,7 +128,7 @@ const pageTitle = `${site.name} — lo-fi, and the news from the tools`;
                       <p class="credit-meta">
                         {track.licence ? <span>{track.licence}</span> : null}
                         {source ? (
-                          <a href={source}>Source</a>
+                          <a href={source}>Track source</a>
                         ) : null}
                       </p>
                     </div>

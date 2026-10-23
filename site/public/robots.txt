@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devradio.co.uk/sitemap.xml

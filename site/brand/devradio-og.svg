@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1a1b26"/>
+  <circle cx="1040" cy="400" r="220" fill="#7aa2f7" opacity="0.08"/>
+  <g fill="none" stroke-linecap="square">
+    <path d="M912 328h32" stroke="#7aa2f7" stroke-width="8"/>
+    <path d="M972 264v128" stroke="#7aa2f7" stroke-width="8"/>
+    <path d="M1032 196v264" stroke="#bb9af7" stroke-width="8"/>
+    <path d="M1092 252v152" stroke="#7aa2f7" stroke-width="8"/>
+  </g>
+  <rect x="96" y="96" width="132" height="46" rx="23" fill="#1f2335" stroke="#7aa2f7" stroke-width="2"/>
+  <text x="162" y="126" text-anchor="middle" font-family="JetBrains Mono" font-size="22" font-weight="500" fill="#7aa2f7">alpha</text>
+  <text x="96" y="328" font-family="Geist" font-size="104" font-weight="400" fill="#c0caf5">DevRadio</text>
+  <rect x="96" y="356" width="88" height="5" fill="#7aa2f7"/>
+  <text x="96" y="448" font-family="Geist" font-size="46" font-weight="400" fill="#c0caf5">Lo-fi beats. AI news, slowed down.</text>
+</svg>
