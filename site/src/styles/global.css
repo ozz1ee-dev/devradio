@@ -226,18 +226,9 @@ ol {
 }
 
 .brand-name {
-  display: block;
   font-weight: 560;
   letter-spacing: -0.03em;
   line-height: 1;
-}
-
-.brand-host {
-  display: block;
-  margin-top: 0.2rem;
-  color: var(--faint);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
 }
 
 .nav {
