@@ -14,7 +14,7 @@ Contact the maintainers by either route:
 Please include:
 
 - Your name, organisation (if any), and contact details.
-- The track ID, repository path, or AzuraCast/station URL at issue.
+- The track ID, repository path, or station URL at issue.
 - The specific rights you own or control, and why the submission is unauthorised.
 - The licence you believe applies, if any, and any contrary evidence.
 - A statement that you have a good-faith belief the use is not authorised.
@@ -27,9 +27,9 @@ Please include:
 | Step | Target |
 | --- | --- |
 | Acknowledge receipt | 2 business days |
-| Precautionary disable in AzuraCast (track off air while checked) | 48 hours of receipt (proposal) |
+| Precautionary disable on the station (track off air while checked) | 48 hours of receipt (proposal) |
 | Verify the claim and identify affected files | 2 business days |
-| Remove from the AzuraCast playlist and repository | Within 5 business days of a verified claim |
+| Remove from the station playlist and repository | Within 5 business days of a verified claim |
 | Notify the contributor | After removal |
 | Resolve attribution/licence error, if applicable | Within 7 business days of the proposal |
 
@@ -40,7 +40,7 @@ removed immediately, before verification is complete.
 
 On a verified claim, maintainers will:
 
-1. Remove the track from active AzuraCast playlists and, where possible, from the media library.
+1. Remove the track from active station playlists and, where possible, from the media library.
 2. Remove the `tracks/<slug>/` folder (or mark it disabled) from the repository.
 3. Record the takedown in the moderation log, including the track ID and date.
 4. Tell the contributor what was removed and why, without disclosing more personal data than
@@ -79,5 +79,5 @@ notices so that patterns can be reviewed.
 ## Scope
 
 This procedure applies to audio, metadata, artwork, and comments in this repository and to the
-station's AzuraCast media library. It does not replace any statutory takedown process available in
+station's media library. It does not replace any statutory takedown process available in
 your jurisdiction.

@@ -1,6 +1,6 @@
 # Contributing a track
 
-This repository feeds a 24/7 lo-fi internet radio station running on AzuraCast. By opening a PR
+This repository feeds a 24/7 lo-fi internet radio station running on our playout server. By opening a PR
 you confirm the licence attestation in the pull request template and agree to the
 [takedown procedure](TAKEDOWN.md).
 
@@ -46,7 +46,7 @@ Every submission needs:
 ## 3. Publish the audio and add its URL
 
 Audio files are **not** committed to this repository. They live at the public URL you provide and,
-after import, on the AzuraCast station.
+after import, on the station's server.
 
 1. Upload the audio to a public HTTPS location you control, for example a GitHub Release asset on
    your fork or your own web server.
@@ -112,13 +112,13 @@ n8n import on the owner's home server.
 - Do not add secrets, workflow changes, or unrelated files to a track PR.
 - Maintainers may ask for a different master, a shorter edit, or proof of licence.
 - After merge, the n8n workflow in the **devradio** folder polls `tracks/index.json`, downloads
-  the new audio, verifies its sha256, and uploads it to the AzuraCast station media folder. GitHub
-  does not contact AzuraCast and holds no AzuraCast or SFTP secrets.
+  the new audio, verifies its sha256, and uploads it to the station's media folder. GitHub
+  does not contact the playout server and holds no playout or SFTP secrets.
 
 ## Takedown summary
 
 If you believe a track infringes your rights, follow [TAKEDOWN.md](TAKEDOWN.md). Verified claims
-lead to removal from the repository and the AzuraCast playlist, normally within 5 business days
+lead to removal from the repository and the station playlist, normally within 5 business days
 (sooner if urgent). Do not open a normal track PR to dispute a takedown; use the takedown process.
 
 ## Questions

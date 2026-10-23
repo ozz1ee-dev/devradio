@@ -1,13 +1,13 @@
 /**
  * Station and site settings. Stream, player, and now-playing URLs live only here.
  *
- * AzuraCast station id 7, shortcode `devradio.co.uk`.
+ * Station id 7, shortcode `devradio.co.uk`.
  * The stream and now-playing endpoints are the public URLs for that station.
  * Both answer 404 while the station is off air. The page treats a failed
  * mount or a failed now-playing request as "Offline — coming soon".
  */
 export const station = {
-  azuraCastStationId: 7,
+  stationId: 7,
   shortcode: "devradio.co.uk",
   streamUrl: "https://stream.radiohost.cloud/listen/devradio.co.uk/radio.mp3",
   publicPlayerUrl: "https://stream.radiohost.cloud/public/devradio.co.uk",

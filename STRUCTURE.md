@@ -35,10 +35,10 @@
 - `.github/workflows/validate.yml` uses `pull_request`, never `pull_request_target`, so fork code
   cannot read repository secrets. It downloads each submitted file from `audio.audio_url`, verifies
   `audio.sha256`, and runs the existing audio checks.
-- After merge, GitHub does not contact AzuraCast. The n8n workflow on the owner's home server, in
+- After merge, GitHub does not contact the playout server. The n8n workflow on the owner's home server, in
   the **devradio** folder, polls `tracks/index.json` on the default branch, deduplicates by
-  `sha256`, downloads new tracks, verifies the checksum and uploads them to the AzuraCast station
-  media folder. All AzuraCast and SFTP credentials live only in n8n credentials.
+  `sha256`, downloads new tracks, verifies the checksum and uploads them to the station
+  media folder. All playout-server and SFTP credentials live only in n8n credentials.
 - The station media folder is the single copy of the broadcast library. Back it up on a schedule
   and test restores; see [docs/N8N-IMPORT.md](docs/N8N-IMPORT.md).
 
@@ -47,5 +47,5 @@
 The public site lives in `site/` (Astro). `.github/workflows/pages.yml` builds it and can deploy
 to GitHub Pages after Pages is enabled. Stream, public player, and now-playing URLs are only in
 `site/src/config.ts`. The credits section is rendered from `tracks/index.json` at build time.
-No workflow calls AzuraCast. The browser asks the public now-playing URL itself and shows an
+No workflow calls the playout server. The browser asks the public now-playing URL itself and shows an
 offline state when that request fails.
