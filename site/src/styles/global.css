@@ -566,6 +566,10 @@ ol {
   list-style: none;
 }
 
+.credit-group {
+  margin-top: 1.75rem;
+}
+
 .credit-meta {
   display: flex;
   flex-wrap: wrap;
