@@ -1,0 +1,105 @@
+---
+import CreditList from "../components/CreditList.astro";
+import { docs, site } from "../config";
+import {
+  attributionTracks,
+  isLibraryTrackPage,
+  licencePresentation,
+  publicDomainTracks,
+} from "../data/credits";
+import { loadTracks, pageUrl } from "../lib/tracks";
+import Base from "../layouts/Base.astro";
+
+const pageTitle = `Music credits — ${site.name}`;
+const pageDescription =
+  "Artist, Free Music Archive track page, and Creative Commons licence for every track played on DevRadio.";
+
+const catalogue = loadTracks().filter((track) => !isLibraryTrackPage(track.source_url));
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <div class="shell">
+    <section class="page-hero" aria-labelledby="credits-title">
+      <p class="kicker">Library</p>
+      <h1 id="credits-title" class="page-title">Music credits</h1>
+      <p class="tagline">Artist, source, and licence for the music on DevRadio.</p>
+      <p class="deck">
+        This music is used under the Creative Commons licences named below. To report a problem
+        with a track, use the <a href={docs.takedown}>takedown procedure</a>.
+      </p>
+    </section>
+
+    <section class="section" id="attribution" aria-labelledby="attribution-title">
+      <div>
+        <p class="kicker">01</p>
+        <h2 id="attribution-title">Attribution</h2>
+      </div>
+      <div>
+        <p class="lede">
+          These tracks use Creative Commons Attribution. The artist, the track page on the Free
+          Music Archive, and the licence stay with the credit.
+        </p>
+        <CreditList tracks={attributionTracks} />
+      </div>
+    </section>
+
+    <section class="section" id="public-domain" aria-labelledby="public-domain-title">
+      <div>
+        <p class="kicker">02</p>
+        <h2 id="public-domain-title">Public domain</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Tracks by <a href="https://freemusicarchive.org/music/holiznacc0/">HoliznaCC0</a> on the
+          Free Music Archive are dedicated to the public domain under
+          <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0</a>.
+          Credit is not required. They are listed here as a courtesy, and each title links to its
+          track page.
+        </p>
+        <CreditList tracks={publicDomainTracks} />
+      </div>
+    </section>
+
+    {
+      catalogue.length > 0 ? (
+        <section class="section" id="submissions" aria-labelledby="submissions-title">
+          <div>
+            <p class="kicker">03</p>
+            <h2 id="submissions-title">Submissions</h2>
+          </div>
+          <div>
+            <p class="lede">
+              Community submissions accepted into the catalogue, with the licence and source page
+              from the track record.
+            </p>
+            <ol class="credits">
+              {catalogue.map((track) => {
+                const source = pageUrl(track.source_url);
+                const licence = licencePresentation(track.licence);
+                return (
+                  <li class="credit">
+                    <p class="idx">{track.id}</p>
+                    <div>
+                      <p class="credit-title">{track.title || track.id}</p>
+                      {track.artist ? <p>{track.artist}</p> : null}
+                      <p class="credit-meta">
+                        {licence?.url ? (
+                          <a href={licence.url} rel="license">
+                            {licence.name}
+                          </a>
+                        ) : licence ? (
+                          <span>{licence.name}</span>
+                        ) : null}
+                        {source ? <a href={source}>Source</a> : null}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </section>
+      ) : null
+    }
+  </div>
+</Base>

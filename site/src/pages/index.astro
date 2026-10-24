@@ -2,7 +2,8 @@
 import Base from "../layouts/Base.astro";
 import { docs, site } from "../config";
 import { notes } from "../lib/news";
-import { httpUrl, loadTracks } from "../lib/tracks";
+import { licencePresentation } from "../data/credits";
+import { loadTracks, pageUrl } from "../lib/tracks";
 
 const tracks = loadTracks();
 const pageTitle = site.title;
@@ -105,20 +106,22 @@ const pageDescription = site.seoDescription;
       </div>
       <div>
         <p class="lede">
-          Merged tracks are listed from <span class="mono">tracks/index.json</span> with the artist,
-          the licence, and the source. The audio stays at the contributor’s URL.
+          The on-air library is credited on the music credits page: artist, Free Music Archive
+          track page, and Creative Commons licence. Community submissions are listed here after
+          they merge.
+        </p>
+        <p class="doc-links">
+          <a href="/credits">Music credits</a>
+          <a href={docs.takedown}>Takedown</a>
         </p>
         {
           tracks.length === 0 ? (
-            <div class="empty">
-              <p class="kicker">Catalogue</p>
-              <p class="empty-title">No tracks in the index yet.</p>
-              <p>When the first submission is merged, its credit appears here.</p>
-            </div>
+            <p class="fine">No community submissions in the index yet.</p>
           ) : (
             <ol class="credits">
               {tracks.map((track) => {
-                const source = httpUrl(track.source_url);
+                const source = pageUrl(track.source_url);
+                const licence = licencePresentation(track.licence);
                 return (
                   <li class="credit">
                     <p class="idx">{track.id}</p>
@@ -126,10 +129,12 @@ const pageDescription = site.seoDescription;
                       <p class="credit-title">{track.title || track.id}</p>
                       {track.artist ? <p>{track.artist}</p> : null}
                       <p class="credit-meta">
-                        {track.licence ? <span>{track.licence}</span> : null}
-                        {source ? (
-                          <a href={source}>Track source</a>
+                        {licence?.url ? (
+                          <a href={licence.url} rel="license">{licence.name}</a>
+                        ) : licence ? (
+                          <span>{licence.name}</span>
                         ) : null}
+                        {source ? <a href={source}>Source</a> : null}
                       </p>
                     </div>
                   </li>

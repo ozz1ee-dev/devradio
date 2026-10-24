@@ -1,0 +1,58 @@
+---
+import { licenceDeeds, type CreditTrack } from "../data/credits";
+
+interface Props {
+  tracks: CreditTrack[];
+}
+
+const { tracks } = Astro.props;
+
+function lineParts(line: string): { lead: string; url: string | null } {
+  const match = line.match(/^(.*)(https:\/\/\S+)$/);
+  if (!match) return { lead: line, url: null };
+  return { lead: match[1], url: match[2] };
+}
+---
+
+<ol class="credits">
+  {
+    tracks.map((track, index) => {
+      const licence = licenceDeeds[track.licence];
+      const line = track.artist.creditLine ? lineParts(track.artist.creditLine) : null;
+      const number = String(index + 1).padStart(2, "0");
+      return (
+        <li class="credit">
+          <p class="idx">{number}</p>
+          <div>
+            <p class="credit-title">
+              <a href={track.trackUrl}>{track.title}</a>
+            </p>
+            <p>
+              <a href={track.artist.url}>{track.artist.name}</a>
+            </p>
+            <p class="credit-meta">
+              <span>
+                Source: <a href={track.trackUrl}>Free Music Archive</a>
+              </span>
+              <a href={licence.url} rel="license">
+                {licence.name}
+              </a>
+            </p>
+            {line ? (
+              <p>
+                {line.url ? (
+                  <>
+                    {`${line.lead.trimEnd()} `}
+                    <a href={line.url}>{line.url}</a>
+                  </>
+                ) : (
+                  line.lead
+                )}
+              </p>
+            ) : null}
+          </div>
+        </li>
+      );
+    })
+  }
+</ol>
