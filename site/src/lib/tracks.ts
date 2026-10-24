@@ -26,6 +26,8 @@ export function loadTracks(): CatalogueTrack[] {
   return data.tracks.filter(isTrack);
 }
 
+const AUDIO_FILE = /\.(?:mp3|flac|wav|ogg|oga|m4a|aac|aiff?|opus)(?:$|[?#])/i;
+
 export function httpUrl(value: unknown): string | null {
   if (typeof value !== "string") return null;
   try {
@@ -35,4 +37,17 @@ export function httpUrl(value: unknown): string | null {
     return null;
   }
   return null;
+}
+
+/** Public page URL. Audio files, including Free Music Archive file hosts, are never linked. */
+export function pageUrl(value: unknown): string | null {
+  const url = httpUrl(value);
+  if (!url) return null;
+  const parsed = new URL(url);
+  const host = parsed.hostname.toLowerCase();
+  if (host === "files.freemusicarchive.org" || host.endsWith(".files.freemusicarchive.org")) {
+    return null;
+  }
+  if (AUDIO_FILE.test(parsed.pathname) || AUDIO_FILE.test(parsed.href)) return null;
+  return url;
 }
