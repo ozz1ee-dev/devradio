@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { docs, site } from "../config";
 import { notes } from "../lib/news";
-import { licencePresentation } from "../data/credits";
+import { libraryTracks, licencePresentation } from "../data/credits";
 import { loadTracks, pageUrl } from "../lib/tracks";
 
 const tracks = loadTracks();
@@ -106,9 +106,9 @@ const pageDescription = site.seoDescription;
       </div>
       <div>
         <p class="lede">
-          The on-air library is credited on the music credits page: artist, Free Music Archive
-          track page, and Creative Commons licence. Community submissions are listed here after
-          they merge.
+          The on-air library is {libraryTracks.length} tracks, credited on the music credits page:
+          artist, Free Music Archive track page, and Creative Commons licence. Community submissions
+          are listed here after they merge.
         </p>
         <p class="doc-links">
           <a href="/credits">Music credits</a>

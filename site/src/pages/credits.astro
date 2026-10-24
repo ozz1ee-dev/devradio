@@ -4,8 +4,10 @@ import { docs, site } from "../config";
 import {
   attributionTracks,
   isLibraryTrackPage,
+  libraryTracks,
+  licenceDeeds,
   licencePresentation,
-  publicDomainTracks,
+  publicDomainGroups,
 } from "../data/credits";
 import { loadTracks, pageUrl } from "../lib/tracks";
 import Base from "../layouts/Base.astro";
@@ -22,7 +24,7 @@ const catalogue = loadTracks().filter((track) => !isLibraryTrackPage(track.sourc
     <section class="page-hero" aria-labelledby="credits-title">
       <p class="kicker">Library</p>
       <h1 id="credits-title" class="page-title">Music credits</h1>
-      <p class="tagline">Artist, source, and licence for the music on DevRadio.</p>
+      <p class="tagline">Artist, source, and licence for the {libraryTracks.length} tracks on DevRadio.</p>
       <p class="deck">
         This music is used under the Creative Commons licences named below. To report a problem
         with a track, use the <a href={docs.takedown}>takedown procedure</a>.
@@ -50,13 +52,24 @@ const catalogue = loadTracks().filter((track) => !isLibraryTrackPage(track.sourc
       </div>
       <div>
         <p class="lede">
-          Tracks by <a href="https://freemusicarchive.org/music/holiznacc0/">HoliznaCC0</a> on the
-          Free Music Archive are dedicated to the public domain under
-          <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0 1.0</a>.
-          Credit is not required. They are listed here as a courtesy, and each title links to its
-          track page.
+          Credit is not required. These tracks are listed here as a courtesy, grouped by artist, and
+          each title links to its track page.
         </p>
-        <CreditList tracks={publicDomainTracks} />
+        {
+          publicDomainGroups.map((group) => (
+            <div class="credit-group">
+              <p class="lede">
+                Tracks by <a href={group.artist.url}>{group.artist.name}</a> on the Free Music
+                Archive are dedicated to the public domain under{" "}
+                <a href={licenceDeeds["CC0-1.0"].url} rel="license">
+                  {licenceDeeds["CC0-1.0"].name}
+                </a>
+                .
+              </p>
+              <CreditList tracks={group.tracks} />
+            </div>
+          ))
+        }
       </div>
     </section>
 
