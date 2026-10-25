@@ -99,7 +99,7 @@ function startPlayer(): void {
     statusText.textContent = text;
     status.dataset.state = text === OFFLINE ? "offline" : playing ? "live" : "idle";
     buttons.forEach((button) => {
-      const slot = button.querySelector<HTMLElement>("[data-play-label]");
+      const slots = button.querySelectorAll<HTMLElement>("[data-play-label]");
       const playLabel = button.dataset.labelPlay ?? "Play";
       const stopLabel = button.dataset.labelStop ?? "Stop";
       button.setAttribute("aria-pressed", playing ? "true" : "false");
@@ -110,7 +110,9 @@ function startPlayer(): void {
           `${playing ? "Stop" : "Play"} the live stream. Volume ${volumeLabel()}. Use the arrow keys to change it.`,
         );
       }
-      if (slot) slot.textContent = playing ? stopLabel : playLabel;
+      slots.forEach((slot) => {
+        slot.textContent = playing ? stopLabel : playLabel;
+      });
     });
   };
 
