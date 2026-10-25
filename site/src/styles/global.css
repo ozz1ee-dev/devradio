@@ -120,7 +120,7 @@ body {
     scroll-behavior: auto;
   }
 
-  .play::before {
+  .play-fill {
     transition: none;
   }
 }
@@ -325,27 +325,40 @@ ol {
   isolation: isolate;
   overflow: hidden;
   min-width: 6.25rem;
+  background: transparent;
+  color: var(--fg);
   touch-action: pan-y;
   -webkit-user-select: none;
   user-select: none;
 }
 
-/* Volume level, drawn as a left-to-right fill in the button background.
-   The value is set by site/src/scripts/station.ts on wheel, drag and keys. */
-.play::before {
-  content: "";
+/* Volume level: the accent fill is clipped from the right, so lowering the
+   volume opens an empty space inside the button. At 100% the button looks
+   exactly like the plain accent button. The value is set by
+   site/src/scripts/station.ts on wheel, drag and keys. */
+.play-fill {
   position: absolute;
-  inset: 0 auto 0 0;
-  z-index: -1;
-  width: calc(var(--volume) * 100%);
-  background: var(--accent-2);
-  opacity: 0.55;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: inherit;
+  background: var(--accent);
+  color: var(--accent-fg);
+  clip-path: inset(0 calc((1 - var(--volume)) * 100%) 0 0);
   pointer-events: none;
-  transition: width 90ms linear;
+  transition: clip-path 90ms linear;
 }
 
-.play > * {
+.play-label {
   position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
 }
 
 .play.is-adjusting {
