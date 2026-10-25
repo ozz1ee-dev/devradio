@@ -119,6 +119,10 @@ body {
   html {
     scroll-behavior: auto;
   }
+
+  .play::before {
+    transition: none;
+  }
 }
 
 :focus {
@@ -316,7 +320,36 @@ ol {
 }
 
 .play {
+  --volume: 0.8;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-width: 6.25rem;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Volume level, drawn as a left-to-right fill in the button background.
+   The value is set by site/src/scripts/station.ts on wheel, drag and keys. */
+.play::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  width: calc(var(--volume) * 100%);
+  background: var(--accent-2);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: width 90ms linear;
+}
+
+.play > * {
+  position: relative;
+}
+
+.play.is-adjusting {
+  cursor: ew-resize;
 }
 
 .play svg {
