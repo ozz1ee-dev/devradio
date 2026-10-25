@@ -339,7 +339,7 @@ ol {
 .play-fill {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,9 +352,11 @@ ol {
   transition: clip-path 90ms linear;
 }
 
+/* Sits under the fill, so the label is light where there is no colour under
+   it and the fill's own dark label wins where the colour reaches. */
 .play-label {
   position: relative;
-  z-index: 1;
+  z-index: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
