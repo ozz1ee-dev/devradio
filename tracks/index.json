@@ -1,24 +1,3 @@
 {
-  "tracks": [
-    {
-      "id": "dusty-tape-loop",
-      "title": "Dusty Tape Loop",
-      "artist": "DevRadio",
-      "licence": "CC-BY-4.0",
-      "source_url": "https://deapi.ai/models/ace-step-15-xl-turbo",
-      "sha256": "c37c31d58bde858e3b28185d57a5ba630784bb29d339f9b35e5aff30a7c7d3ae",
-      "audio_url": "https://github.com/ozz1ee-dev/devradio/releases/download/tracks-2026-10-28/dusty-tape-loop.mp3",
-      "fingerprint": null
-    },
-    {
-      "id": "rain-on-the-build-log",
-      "title": "Rain on the Build Log",
-      "artist": "DevRadio",
-      "licence": "CC-BY-4.0",
-      "source_url": "https://deapi.ai/models/ace-step-15-xl-turbo",
-      "sha256": "6f5108a506515c33a890290c22992180ac9f3d504ad7be5f337650c3b2f6a32d",
-      "audio_url": "https://github.com/ozz1ee-dev/devradio/releases/download/tracks-2026-10-28/rain-on-the-build-log.mp3",
-      "fingerprint": null
-    }
-  ]
+  "tracks": []
 }
