@@ -11,6 +11,10 @@ export const licenceDeeds = {
     name: "CC BY 3.0",
     url: "https://creativecommons.org/licenses/by/3.0/",
   },
+  "CC-BY-3.0-US": {
+    name: "CC BY 3.0 US",
+    url: "https://creativecommons.org/licenses/by/3.0/us/",
+  },
   "CC-BY-4.0": {
     name: "CC BY 4.0",
     url: "https://creativecommons.org/licenses/by/4.0/",
@@ -25,7 +29,7 @@ export const licenceDeeds = {
   },
 } as const;
 
-export type LibraryLicence = "CC-BY-3.0" | "CC-BY-4.0" | "CC0-1.0";
+export type LibraryLicence = "CC-BY-3.0" | "CC-BY-3.0-US" | "CC-BY-4.0" | "CC0-1.0";
 
 export type CreditArtist = {
   name: string;
@@ -82,6 +86,8 @@ const loFiAstronaut = artist("Lo-Fi Astronaut", "https://freemusicarchive.org/mu
 const serat = artist("Serat", "https://freemusicarchive.org/music/serat/");
 const loyaltyFreak = artist("Loyalty Freak Music", "https://freemusicarchive.org/music/Loyalty_Freak_Music/");
 const koiDiscovery = artist("Koi-discovery", "https://freemusicarchive.org/music/koi-discovery/");
+const pamelaYuen = artist("Pamela Yuen", "https://freemusicarchive.org/music/pamela-yuen/");
+const leeRosevere = artist("Lee Rosevere", "https://freemusicarchive.org/music/lee-rosevere/");
 
 function track(
   title: string,
@@ -334,6 +340,114 @@ export const attributionTracks: CreditTrack[] = [
     "https://freemusicarchive.org/music/serat/flow-sessions/emergence/",
     "CC-BY-4.0",
   ),
+  track(
+    "A Balloon In The Sky",
+    loFiAstronaut,
+    "https://freemusicarchive.org/music/lo-fi-astronaut/lo-fi-and-beyond/a-balloon-in-the-sky-lofi-nostalgic/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Design For Dreaming",
+    loFiAstronaut,
+    "https://freemusicarchive.org/music/lo-fi-astronaut/lo-fi-and-beyond/design-for-dreaming-lofi-relaxing/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Artificial Rain",
+    loFiAstronaut,
+    "https://freemusicarchive.org/music/lo-fi-astronaut/lo-fi-and-beyond/artificial-rain-lof-i-chill/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Attic Of The Universe",
+    loFiAstronaut,
+    "https://freemusicarchive.org/music/lo-fi-astronaut/lo-fi-and-beyond/attic-of-the-universe-lofi-retro/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Autumn In The Air",
+    loFiAstronaut,
+    "https://freemusicarchive.org/music/lo-fi-astronaut/lo-fi-and-beyond/autumn-in-the-air-lofi-nostalgic/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Playtime",
+    pamelaYuen,
+    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/playtime/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Dream Diary",
+    pamelaYuen,
+    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/dream-diary/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Evening Glow",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/evening-glow/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Heat Haze",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/heat-haze/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Going Home",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/going-home-1/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Places Unseen",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/places-unseen/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Looking Back",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/looking-back-3/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Keeping Stuff Together",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/keeping-stuff-together/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Last Call",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/last-call/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Content",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/content/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Going in circles",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/going-in-circles/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "You're Enough (version b)",
+    leeRosevere,
+    "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/youre-enough-version-b/",
+    "CC-BY-4.0",
+  ),
+  track(
+    "Something Elated",
+    brokeForFree,
+    "https://freemusicarchive.org/music/Broke_For_Free/Something_EP/Broke_For_Free_-_Something_EP_-_05_Something_Elated/",
+    "CC-BY-3.0-US",
+  ),
 ];
 
 /** Public-domain tracks. Credit is a courtesy. */
@@ -519,6 +633,132 @@ export const publicDomainTracks: CreditTrack[] = [
     "CC0-1.0",
   ),
   track(
+    "Kodama",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/kodama/",
+    "CC0-1.0",
+  ),
+  track(
+    "Kitsune",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/kitsune/",
+    "CC0-1.0",
+  ),
+  track(
+    "Tengu",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/tengu/",
+    "CC0-1.0",
+  ),
+  track(
+    "Tanuki",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/tanuki/",
+    "CC0-1.0",
+  ),
+  track(
+    "Tsukumogami",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/tsukumogami/",
+    "CC0-1.0",
+  ),
+  track(
+    "Yuki-onna",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/nature-spirit/yuki-onna/",
+    "CC0-1.0",
+  ),
+  track(
+    "Feeling Human Again",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/feeling-human-again/",
+    "CC0-1.0",
+  ),
+  track(
+    "Toy Box",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/toy-box/",
+    "CC0-1.0",
+  ),
+  track(
+    "Foley Of Man",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/foley-of-man/",
+    "CC0-1.0",
+  ),
+  track(
+    "Hope On Repeat",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/hope-on-repeat/",
+    "CC0-1.0",
+  ),
+  track(
+    "Spring In Sight",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/spring-in-sight/",
+    "CC0-1.0",
+  ),
+  track(
+    "Seasonal Depression",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/spring-woke-me-up/seasonal-depression/",
+    "CC0-1.0",
+  ),
+  track(
+    "2 Hour Delay",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/winter-lofi/2-hour-delay-1/",
+    "CC0-1.0",
+  ),
+  track(
+    "Winter Blues",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/winter-lofi/winter-blues/",
+    "CC0-1.0",
+  ),
+  track(
+    "First Snow",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/winter-lofi/first-snowmp3/",
+    "CC0-1.0",
+  ),
+  track(
+    "Snow Drift",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/winter-lofi/snow-drift/",
+    "CC0-1.0",
+  ),
+  track(
+    "Fire Place",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/winter-lofi/fire-place/",
+    "CC0-1.0",
+  ),
+  track(
+    "Windows Down",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/lazy-summer-lofi-1/windows-downmp3/",
+    "CC0-1.0",
+  ),
+  track(
+    "Blue Skies",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/lazy-summer-lofi-1/blue-skiesmp3/",
+    "CC0-1.0",
+  ),
+  track(
+    "Laundry On The Wire",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/lazy-summer-lofi-1/laundry-on-the-wiremp3/",
+    "CC0-1.0",
+  ),
+  track(
+    "Waves",
+    holizna,
+    "https://freemusicarchive.org/music/holiznacc0/lazy-summer-lofi-1/wavesmp3/",
+    "CC0-1.0",
+  ),
+  track(
     "Coexistenz",
     loyaltyFreak,
     "https://freemusicarchive.org/music/Loyalty_Freak_Music/TO_CHILL_AND_STAY_AWAKE/Loyalty_Freak_Music_-_TO_CHILL_AND_STAY_AWAKE_-_01_Coexistenz/",
@@ -609,6 +849,84 @@ export const publicDomainTracks: CreditTrack[] = [
     "CC0-1.0",
   ),
   track(
+    "Once more with you",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_01_Once_more_with_you/",
+    "CC0-1.0",
+  ),
+  track(
+    "One Cool Minute",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_02_One_Cool_Minute/",
+    "CC0-1.0",
+  ),
+  track(
+    "Old Key",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_03_Old_Key/",
+    "CC0-1.0",
+  ),
+  track(
+    "Static Shoes",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_04_Static_Shoes/",
+    "CC0-1.0",
+  ),
+  track(
+    "Waiting TTTT",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_05_Waiting_TTTT/",
+    "CC0-1.0",
+  ),
+  track(
+    "Lag",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_06_Lag/",
+    "CC0-1.0",
+  ),
+  track(
+    "No Cadillac",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MINIMAL_AMBIENT_BOUNCE/Loyalty_Freak_Music_-_MINIMAL_AMBIENT_BOUNCE_-_07_No_Cadillac/",
+    "CC0-1.0",
+  ),
+  track(
+    "Love Him",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_03_Love_Him/",
+    "CC0-1.0",
+  ),
+  track(
+    "Love Her",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_04_Love_Her/",
+    "CC0-1.0",
+  ),
+  track(
+    "Shoepop",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_09_Shoepop/",
+    "CC0-1.0",
+  ),
+  track(
+    "Standing",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_11_Standing/",
+    "CC0-1.0",
+  ),
+  track(
+    "Untitled",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_12_Untitled/",
+    "CC0-1.0",
+  ),
+  track(
+    "Work",
+    loyaltyFreak,
+    "https://freemusicarchive.org/music/Loyalty_Freak_Music/MELODIES_WITH_A_BEAT/Loyalty_Freak_Music_-_MELODIES_WITH_A_BEAT_-_13_Work/",
+    "CC0-1.0",
+  ),
+  track(
     "Thrusly_Marylin",
     koiDiscovery,
     "https://freemusicarchive.org/music/koi-discovery/ante-chrysalide/thrusly-marylinmp3/",
@@ -635,7 +953,7 @@ export function isLibraryTrackPage(url: string | undefined): boolean {
 }
 
 function assertLibrary(): void {
-  const counts = { "CC-BY-3.0": 0, "CC-BY-4.0": 0, "CC0-1.0": 0 };
+  const counts = { "CC-BY-3.0": 0, "CC-BY-3.0-US": 0, "CC-BY-4.0": 0, "CC0-1.0": 0 };
   for (const item of libraryTracks) {
     counts[item.licence] += 1;
     const deed = licenceDeeds[item.licence];
@@ -648,16 +966,21 @@ function assertLibrary(): void {
       throw new Error(`Unexpected credit line on ${item.title}`);
     }
   }
-  if (libraryTracks.length !== 86) throw new Error(`Expected 86 tracks, found ${libraryTracks.length}`);
-  if (attributionTracks.length !== 40) throw new Error(`Expected 40 attribution tracks, found ${attributionTracks.length}`);
-  if (publicDomainTracks.length !== 46) throw new Error(`Expected 46 public-domain tracks, found ${publicDomainTracks.length}`);
-  if (counts["CC-BY-3.0"] !== 5 || counts["CC-BY-4.0"] !== 35 || counts["CC0-1.0"] !== 46) {
+  if (libraryTracks.length !== 138) throw new Error(`Expected 138 tracks, found ${libraryTracks.length}`);
+  if (attributionTracks.length !== 58) throw new Error(`Expected 58 attribution tracks, found ${attributionTracks.length}`);
+  if (publicDomainTracks.length !== 80) throw new Error(`Expected 80 public-domain tracks, found ${publicDomainTracks.length}`);
+  if (
+    counts["CC-BY-3.0"] !== 5 ||
+    counts["CC-BY-3.0-US"] !== 1 ||
+    counts["CC-BY-4.0"] !== 52 ||
+    counts["CC0-1.0"] !== 80
+  ) {
     throw new Error(`Unexpected licence counts: ${JSON.stringify(counts)}`);
   }
   const groupSummary = publicDomainGroups
     .map((group) => `${group.artist.name}:${group.tracks.length}`)
     .join(",");
-  if (groupSummary !== "HoliznaCC0:30,Loyalty Freak Music:15,Koi-discovery:1") {
+  if (groupSummary !== "HoliznaCC0:51,Loyalty Freak Music:28,Koi-discovery:1") {
     throw new Error(`Unexpected public-domain groups: ${groupSummary}`);
   }
   if (libraryTrackUrls.size !== libraryTracks.length) throw new Error("Duplicate track page in the library");
