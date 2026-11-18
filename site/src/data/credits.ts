@@ -88,7 +88,6 @@ const loyaltyFreak = artist("Loyalty Freak Music", "https://freemusicarchive.org
 const koiDiscovery = artist("Koi-discovery", "https://freemusicarchive.org/music/koi-discovery/");
 const pamelaYuen = artist("Pamela Yuen", "https://freemusicarchive.org/music/pamela-yuen/");
 const leeRosevere = artist("Lee Rosevere", "https://freemusicarchive.org/music/lee-rosevere/");
-const jmhbm = artist("JMHBM", "https://freemusicarchive.org/music/beat-mekanik/");
 
 function track(
   title: string,
@@ -372,18 +371,6 @@ export const attributionTracks: CreditTrack[] = [
     "CC-BY-4.0",
   ),
   track(
-    "Paws For A While",
-    pamelaYuen,
-    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/paws-for-a-while/",
-    "CC-BY-4.0",
-  ),
-  track(
-    "The Last Of Illusions",
-    pamelaYuen,
-    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/the-last-of-illusions/",
-    "CC-BY-4.0",
-  ),
-  track(
     "Playtime",
     pamelaYuen,
     "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/playtime/",
@@ -393,18 +380,6 @@ export const attributionTracks: CreditTrack[] = [
     "Dream Diary",
     pamelaYuen,
     "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/dream-diary/",
-    "CC-BY-4.0",
-  ),
-  track(
-    "The Hunger Within",
-    pamelaYuen,
-    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/the-hunger-within/",
-    "CC-BY-4.0",
-  ),
-  track(
-    "No Map, Only Light",
-    pamelaYuen,
-    "https://freemusicarchive.org/music/pamela-yuen/indie-chillout/no-map-only-light/",
     "CC-BY-4.0",
   ),
   track(
@@ -465,12 +440,6 @@ export const attributionTracks: CreditTrack[] = [
     "You're Enough (version b)",
     leeRosevere,
     "https://freemusicarchive.org/music/lee-rosevere/music-for-podcasts-beats/youre-enough-version-b/",
-    "CC-BY-4.0",
-  ),
-  track(
-    "Moonrise",
-    jmhbm,
-    "https://freemusicarchive.org/music/beat-mekanik/single/moonrise/",
     "CC-BY-4.0",
   ),
   track(
@@ -997,13 +966,13 @@ function assertLibrary(): void {
       throw new Error(`Unexpected credit line on ${item.title}`);
     }
   }
-  if (libraryTracks.length !== 143) throw new Error(`Expected 143 tracks, found ${libraryTracks.length}`);
-  if (attributionTracks.length !== 63) throw new Error(`Expected 63 attribution tracks, found ${attributionTracks.length}`);
+  if (libraryTracks.length !== 138) throw new Error(`Expected 138 tracks, found ${libraryTracks.length}`);
+  if (attributionTracks.length !== 58) throw new Error(`Expected 58 attribution tracks, found ${attributionTracks.length}`);
   if (publicDomainTracks.length !== 80) throw new Error(`Expected 80 public-domain tracks, found ${publicDomainTracks.length}`);
   if (
     counts["CC-BY-3.0"] !== 5 ||
     counts["CC-BY-3.0-US"] !== 1 ||
-    counts["CC-BY-4.0"] !== 57 ||
+    counts["CC-BY-4.0"] !== 52 ||
     counts["CC0-1.0"] !== 80
   ) {
     throw new Error(`Unexpected licence counts: ${JSON.stringify(counts)}`);
